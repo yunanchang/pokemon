@@ -46,7 +46,7 @@
 
       // 從查詢字符串中獲取 start 和 end 的值，如果沒有則使用預設值
       var start = parseInt(urlParams.get('start')) || 1;
-      var end = parseInt(urlParams.get('end')) || 15;
+      var end = parseInt(urlParams.get('end')) || 151;
 
       // 監聽所有按鈕的點擊事件
       $(".gen-button").click(function (event) {
