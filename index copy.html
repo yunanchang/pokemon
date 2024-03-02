@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Cute+Font">
-  <style>
-* {
-
-}
-
-  </style>
+<style>
+body{background-image: url(./pokemonbackground/1.jpg);}
+</style>
 
 <head>
   <title>PokeAPI Example</title>
@@ -22,15 +18,8 @@
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="./css.css">
-  <style>
-    th {
-      text-align: center;
 
-    }
-
-  
-  </style>
-
+ 
 </head>
 <body>
 <div class="container">
@@ -71,48 +60,24 @@
       <h3 id="currentFilter"></h3>
       <h3 class="text-end" id="result"></h3>
     </div>
+    
   </div>
   <div>
     <div class="allselect">
-      <h5>Dream-world</h5>
+      <select name="imageType" id="imageType">
+        <option value="front">Front View</option>
+        <option value="back">Back View</option>
+        <option value="official-artwork">Official Artwork</option>
+        <option value="Pokemon-home">Pokemon Home</option>
+        <option value="showdown-front">Showdown Front</option>
+        <option value="showdown-back">Showdown Back</option>
+      </select>
       <!-- linkkk-------------------------------- -->
-  <!-- background -->
-  <label for="backgroundSelector">Background</label>
-  <select id="backgroundSelector"></select>
-   <!-- background -->
-      <!-- typebtn ----------------------->
-      <button id="typeBtn" type="button" data-toggle="modal" data-target="#myModal">
-        <!-- Tpye -->
-        <img id="typeimg" src="./pokemonicon/pikachu.png" alt="">
-        <!-- <img  id="typeimg"src="./pokemonicon/Trending - Pokedex Png, Transparent Png(1690x1207) - PinPng.jpg" alt=""> -->
-      </button>
-
-      <!-- The Modal -->
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-      <div class="modal" id="myModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">Pokemon Type Chart</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal Body -->
-            <div class="modal-body">
-              <img id="type" src="./pokemonicon/Pokemon_Type_Chart.svg.png" alt="">
-            </div>
-
-            <!-- Modal Footer -->
-
-
-          </div>
-        </div>
-      </div>
-      <!-- typebtn end------------------ -->
-      <link rel="stylesheet" href="./styles_right.css">
+      <!-- background -->
+      <label for="backgroundSelector">background</label>
+      <select id="backgroundSelector"></select>
+       <!-- background -->
+      <link rel="stylesheet" href="./styles_left.css">
       <div class="d-flex  justify-content-end">
         <p>basic &nbsp;&nbsp;</p>
         <input type="checkbox" id="switch" onclick="toggleAndRedirect()" />
@@ -128,14 +93,13 @@
             // Set a timeout to wait for 1000 milliseconds (1 second)
             setTimeout(function () {
               // Redirect to pageB.html
-              window.location.href = "./index.html?start=" + start + "&end=" + end;
-             
+          
+              window.location.href = "./pokemon_statistic.html?start=" + start + "&end=" + end;
             }, 500);
           }
         }
       </script>
-      <!-- linkkk end ------------------------------- -->
-      
+ <!-- linkkk end ------------------------------- -->
     </div>
     <table class="display" id="myTable">
       <thead>
@@ -143,14 +107,15 @@
           <th>ID</th>
           <th>Name</th>
           <th>Image</th>
-          <th style="width:13%;">Type</th>
-          <th>HP</th>
-          <th>Attack</th>
-          <th>Defense</th>
-          <th>Sp. Attack</th>
-          <th>Sp. Defense</th>
-          <th>Speed</th>
-          <th>Total</th>
+          <th>Shiny Image</th>
+          <th>Ability</th>
+          <th>Types</th>
+          <th>Height( m )</th>
+          <th>Weight( kg )</th>
+          <th>
+            <img src="../pokemonicon/pokemon.png" alt="" id="icon">
+            Details
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -162,12 +127,12 @@
   <script src="./script.js"></script>
   <script>
     $(document).ready(function () {
-
+    
       const tbody = $('tbody');
       const table = $('#myTable').DataTable({
         "columnDefs": [
           {
-            "targets": 3, // "Types" 欄位的索引
+            "targets": 5, // "Types" 欄位的索引
             "createdCell": function (td, cellData, rowData, row, col) {
               // 解析多屬性
               const types = cellData.split(', ');
@@ -245,7 +210,8 @@
       const currentFilter = $('#currentFilter');
       const activeFilters = [];
       const imageTypeSelect = $('#imageType');
-      const result = $('#result');
+      const result=$('#result');
+
       for (let i = start; i <= end; i++) {
         getPokemonInfo(i);
       }
@@ -271,39 +237,36 @@
 
 
             // 判斷kabi-pika---------------------------------------
-            let link = `<img src="../game/up-arrow.png" alt="" style="width: 30px">`;
+            let link = `<img src="../pokemonicon/up-arrow.png" alt="" style="width: 30px">`;
             if (pokemonData.id === 143) {
-              link = `<img src="../game/snorlax.png" alt="" style="width: 30px">`;
+              link = `<img src="../pokemonicon/snorlax.png" alt="" style="width: 30px">`;
             }
             if (pokemonData.id === 25) {
-              link = `<img src="../game/pikachu.png" alt="" style="width: 30px">`;
+              link = `<img src="../pokemonicon/pikachu.png" alt="" style="width: 30px">`;
             }
             if (pokemonData.id === 151) {
-              link = `<img src="../game/mew.png" alt="" style="width: 30px">`;
+              link = `<img src="../pokemonicon/mew.png" alt="" style="width: 30px">`;
             }
 
             // 判斷kabi-pika  end---------------------------------------
+            let plink = `<a href="https://tw.portal-pokemon.com/play/pokedex/${formattedIndex}" target="_blank">
+                          <div class='link'>${link} </div>  </a>`
 
-            // Calculate Total Stat (for demonstration purposes)
-            const totalStat = pokemonData.stats.reduce((sum, stat) => sum + stat.base_stat, 0);
+            pokemonData.imageType = imageTypeSelect.val();
 
-            // Build image URL
-            // const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
-            const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
+            let images = getImageUrl(pokemonData);
 
             // 將數據插入 DataTable
             table.row.add([
               pokemonData.id,
               pokemonData.name,
-              `<img src="${imageUrl}" alt="Pokemon Image">`,
+              images.normal,  // 使用普通图像
+              images.shiny,   // 使用闪光图像
+              ability,
               types,
-              pokemonData.stats[0].base_stat, // HP
-              pokemonData.stats[1].base_stat, // Attack
-              pokemonData.stats[2].base_stat, // Defense
-              pokemonData.stats[3].base_stat, // Sp. Attack
-              pokemonData.stats[4].base_stat, // Sp. Defense
-              pokemonData.stats[5].base_stat, // Speed
-              totalStat
+              (pokemonData.height / 10),
+              (pokemonData.weight / 10),
+              plink
             ]).draw();
 
           },
@@ -329,7 +292,7 @@
 
         // 使用 DataTable 的 column().search 方法，只顯示完全符合指定類型的行
         const filterRegex = activeFilters.map(filter => `(?=.*\\b${filter}\\b)`).join('');
-        table.column(3).search(filterRegex, true, false).draw();
+        table.column(5).search(filterRegex, true, false).draw();
 
         // 顯示當前篩選條件
         updateFilterText();
@@ -344,7 +307,7 @@
         // 重置當前篩選條件顯示
         currentFilter.text('');
         const pageInfo = table.page.info();
-        result.text(`Records: ${pageInfo.recordsTotal}`);
+    result.text(`Records: ${pageInfo.recordsTotal}`);
       });
 
       function updateFilterText() {
@@ -368,12 +331,14 @@
         currentFilter.prepend('Current Filter: ');
         const pageInfo = table.page.info();
         result.text(`Records: ${pageInfo.recordsDisplay}`);
-
       }
+
+
 
     });
   </script>
 </div>
+
 <div id="popup-container">
   <img id="popup-image" alt="沒照片我也沒辦法啦~" style="width: 100px;">
 </div>
@@ -416,7 +381,6 @@
 
     // 初始顯示第一張圖片
     // changeImage();
-
 
     for (var i = 1; i <= 250; i++) {
         $('#backgroundSelector').append('<option value="./pokemonbackground/' + i + '.jpg">No.' + i + '</option>');
